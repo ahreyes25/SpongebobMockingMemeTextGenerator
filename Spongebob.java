@@ -6,31 +6,37 @@ import java.awt.Toolkit;
 public class Spongebob {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-
+		boolean getInput = true;;
 		System.out.println(spongebobAsciiArt() + "\n" + "Created By: Alex H. Reyes (2018)" + "\n");
 
-		System.out.print("Enter text: ");
-		String str = input.nextLine();
-		str = str.toLowerCase();
-
-		String toReturn = "";
-
-		for (char ch: str.toCharArray()) {
-			if (toCap()) {
-				String temp = "" + ch;
-				temp = temp.toUpperCase();
-				toReturn += temp;
+		while(getInput) {
+			System.out.print("Enter text: ");
+			String str = input.nextLine();
+			str = str.toLowerCase();
+			if (str.equals("q")) {
+				getInput = false;
 			}
-			else {
-				toReturn += ch;
+
+			String toReturn = "";
+
+			for (char ch: str.toCharArray()) {
+				if (toCap()) {
+					String temp = "" + ch;
+					temp = temp.toUpperCase();
+					toReturn += temp;
+				}
+				else {
+					toReturn += ch;
+				}
+			}
+			
+			System.out.println(toReturn);
+			if (!str.equals("q")) {
+				copyTextToClipboard(toReturn);
+				System.out.println("\n" + "This text has been copied to your clipboad. Press Ctrl + V to paste.");
+				System.out.println("\nPress Q to quit.");
 			}
 		}
-		
-		System.out.println(toReturn);
-		copyTextToClipboard(toReturn);
-		System.out.println("\n" + "This text has been copied to your clipboad. Press Ctrl + V to paste.");
-		System.out.println("\nPress Enter to exit.");
-		input.nextLine();
 	}
 
 	public static boolean toCap() {
